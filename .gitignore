@@ -53,3 +53,4 @@ node_modules/
 env/
 .venv/
 venv/
+.vscode/settings.json
