@@ -2,9 +2,15 @@
 #include <lib/smccc.h>
 #include <common/debug.h>
 
+#define SHA_SMC_ID 0x0001
+#define SHA_SMC_CALL_ID                                         \
+	((SMC_TYPE_FAST << FUNCID_TYPE_SHIFT) |                                \
+	 ((SMC_64) << FUNCID_CC_SHIFT) | (OEN_SHA_START << FUNCID_OEN_SHIFT) | \
+	 ((SHA_SMC_ID) & FUNCID_NUM_MASK))
+
 static int sha_svc_setup(void)
 {
-    NOTICE("sha svc setup call\n");
+    NOTICE("Sha SMC FID: %lu\n", SHA_SMC_CALL_ID);
 
     return 0;
 }
