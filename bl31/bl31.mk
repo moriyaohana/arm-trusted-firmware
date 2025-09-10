@@ -44,6 +44,7 @@ BL31_SOURCES		+=	bl31/bl31_main.c				\
 				lib/cpus/errata_common.c			\
 				plat/common/aarch64/platform_mp_stack.S		\
 				services/arm_arch_svc/arm_arch_svc_setup.c	\
+				services/sha_svc/sha_svc.c						\
 				services/std_svc/std_svc_setup.c		\
 				lib/el3_runtime/simd_ctx.c			\
 				${PSCI_LIB_SOURCES}				\
