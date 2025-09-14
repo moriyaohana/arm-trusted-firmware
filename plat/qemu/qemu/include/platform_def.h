@@ -17,6 +17,9 @@
 
 #define PLATFORM_STACK_SIZE 0x1000
 
+#define PLAT_XLAT_TABLES_DYNAMIC 1
+#define XLAT_TABLES_LIB_V2 1
+
 #if ARM_ARCH_MAJOR == 7
 #define PLATFORM_MAX_CPUS_PER_CLUSTER	U(4)
 #define PLATFORM_CLUSTER_COUNT		U(1)
@@ -135,7 +138,9 @@
 #define BL1_RW_BASE			(BL1_RW_LIMIT - 0x12000)
 #define BL1_RW_LIMIT			(BL_RAM_BASE + BL_RAM_SIZE)
 
-/*
+/*#define PLAT_XLAT_TABLES_DYNAMIC 1
+#define XLAT_TABLES_LIB_V2 1
+
  * BL2 specific defines.
  *
  * Put BL2 just below BL3-1. BL2_BASE is calculated using the current BL2 debug
