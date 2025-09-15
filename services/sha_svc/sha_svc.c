@@ -48,9 +48,6 @@ static int map_nonaligned_va(uintptr_t pa, uintptr_t *va, size_t size, unsigned 
 	return res;
 }
 
-/*
- * This function handles Secure SHA256.
- */
 static uintptr_t sha_svc_handler(unsigned int smc_fid,
             u_register_t input_address,
 			u_register_t input_size,
