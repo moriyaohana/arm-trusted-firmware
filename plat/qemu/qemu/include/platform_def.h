@@ -138,9 +138,7 @@
 #define BL1_RW_BASE			(BL1_RW_LIMIT - 0x12000)
 #define BL1_RW_LIMIT			(BL_RAM_BASE + BL_RAM_SIZE)
 
-/*#define PLAT_XLAT_TABLES_DYNAMIC 1
-#define XLAT_TABLES_LIB_V2 1
-
+/*
  * BL2 specific defines.
  *
  * Put BL2 just below BL3-1. BL2_BASE is calculated using the current BL2 debug
