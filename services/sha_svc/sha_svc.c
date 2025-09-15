@@ -63,23 +63,24 @@ static uintptr_t sha_svc_handler(unsigned int smc_fid,
 	NOTICE("sha svc handler call with input buffer: 0x%p\n", (void*)input_address);
 	NOTICE("sha svc handler call with output buffer: 0x%p\n", (void*)output_address);
 
-	uintptr_t test_data_mapping;
-	int res = map_nonaligned_va(input_address, &test_data_mapping, input_size, MT_RO_DATA | MT_NS);
-	if (res != 0) {
-		NOTICE("Failed to add dynamic region with error %d\n", res);
-		SMC_RET1(handle, SMC_UNK);
+	uintptr_t input_buffer_mapping;
+	int map_input_result = map_nonaligned_va(input_address, &input_buffer_mapping, input_size, MT_RO_DATA | MT_NS);
+	if (map_input_result != 0) {
+		NOTICE("Failed to add dynamic region with error %d\n", map_input_result);
+
+		SMC_RET1(handle, SMC_INVALID_PARAM);
 	}	
 
 	uintptr_t output_buffer_mapping;
-	res = map_nonaligned_va(output_address, &output_buffer_mapping, PAGE_SIZE, MT_RW_DATA | MT_NS);
-	if (res != 0) {
-		NOTICE("Failed to add dynamic region with error %d\n", res);
-		SMC_RET1(handle, SMC_UNK);
+	int map_output_result = map_nonaligned_va(output_address, &output_buffer_mapping, PAGE_SIZE, MT_RW_DATA | MT_NS);
+	if (map_output_result != 0) {
+		NOTICE("Failed to add dynamic region with error %d\n", map_output_result);
+
+		SMC_RET1(handle, SMC_INVALID_PARAM);
 	}
 
-	sha256_bytes((void*)test_data_mapping, input_size, (unsigned char *)output_buffer_mapping);
+	sha256_bytes((void*)input_buffer_mapping, input_size, (unsigned char *)output_buffer_mapping);
 	NOTICE("Computed sha\n");
-
 
     SMC_RET1(handle, SMC_OK);
 }
