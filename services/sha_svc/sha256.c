@@ -147,20 +147,6 @@ void sha256_finalize(struct sha256 *sha){
     }
 }
 
-void sha256_finalize_hex(struct sha256 *sha, char *dst_hex65){
-    int i, j;
-    sha256_finalize(sha);
-
-    for (i = 0; i < 8; i++){
-        for (j = 7; j >= 0; j--){
-            uint8_t nibble = (sha->state[i] >> j * 4) & 0xf;
-            *dst_hex65++ = "0123456789abcdef"[nibble];
-        }
-    }
-
-    *dst_hex65 = '\0';
-}
-
 void sha256_finalize_bytes(struct sha256 *sha, void *dst_bytes32){
     uint8_t *ptr = (uint8_t*)dst_bytes32;
     int i, j;
@@ -171,13 +157,6 @@ void sha256_finalize_bytes(struct sha256 *sha, void *dst_bytes32){
             *ptr++ = (sha->state[i] >> j * 8) & 0xff;
         }
     }
-}
-
-void sha256_hex(const void *src, size_t n_bytes, char *dst_hex65){
-    struct sha256 sha;
-    sha256_init(&sha);
-    sha256_append(&sha, src, n_bytes);
-    sha256_finalize_hex(&sha, dst_hex65);
 }
 
 void sha256_bytes(const void *src, size_t n_bytes, void *dst_bytes32){
