@@ -76,7 +76,7 @@ static uintptr_t sha_svc_handler(unsigned int smc_fid,
 		SMC_RET1(handle, SMC_INVALID_PARAM);
 	}
 
-	sha256_bytes((void*)input_buffer_mapping, input_size, (unsigned char *)output_buffer_mapping);
+	sha256((void*)input_buffer_mapping, input_size, (unsigned char *)output_buffer_mapping);
 	NOTICE("Computed sha\n");
 
     SMC_RET1(handle, SMC_OK);
